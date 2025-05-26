@@ -21,6 +21,7 @@ module.exports = {
     'no-var': 0, // 禁用var，用let和const代替
     'no-undef-init': 2, // 变量初始化时不能直接给它赋值为undefined
     'no-undef': 1, // 不能有未定义的变量
-    'vue/multi-word-component-names': 0 // 关闭组件命名检测
+    'vue/multi-word-component-names': 0, // 关闭组件命名检测
+    'vue/require-v-for-key': 'off'
   }
 }

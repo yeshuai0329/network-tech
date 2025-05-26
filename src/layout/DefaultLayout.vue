@@ -1,13 +1,13 @@
 <template>
   <div class="DefaultLayout">
-    <div class="DefaultLayout-header">
-      <Header/>
+    <div class="DefaultLayout-Aside">
+      <Aside />
     </div>
-    <div class="DefaultLayout-container">
-      <div class="DefaultLayout-container-aside">
-        <Aside />
+    <div class="DefaultLayout-right">
+      <div class="DefaultLayout-Header">
+        <Header />
       </div>
-      <div class="DefaultLayout-container-main">
+      <div class="DefaultLayout-main">
         <router-view></router-view>
       </div>
     </div>
@@ -28,39 +28,46 @@ export default {
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  .DefaultLayout-header {
-    width: 100%;
-    height: 48px;
+
+  .DefaultLayout-Aside {
     flex-shrink: 0;
+    height: 100%;
     overflow: hidden;
+    background: #001529;
   }
 
-  .DefaultLayout-container {
-    width: 100%;
+  .DefaultLayout-right {
     flex: 1;
+    height: 100%;
     display: flex;
+    flex-direction: column;
     overflow: hidden;
-    .DefaultLayout-container-aside {
-      width: 240px;
-      height: 100%;
+
+    .DefaultLayout-header {
+      width: 100%;
+      height: 48px;
       flex-shrink: 0;
-      overflow-y: scroll;
-      background-color: rgb(0, 21, 41);
-    }
-    .DefaultLayout-container-aside::-webkit-scrollbar {
-      display: none; /* 隐藏滚动条 */
+      overflow: hidden;
+      border-bottom: 1px solid #ccc;
     }
 
-    .DefaultLayout-container-aside {
-      -ms-overflow-style: none; /* IE 和 Edge */
-      scrollbar-width: none; /* Firefox */
-    }
-    .DefaultLayout-container-main {
-      background: plum;
+    .DefaultLayout-main {
       flex: 1;
-      height: 100%;
+      overflow-y: scroll;
+      padding: 40px 30px;
+      box-sizing: border-box;
+    }
+
+    .DefaultLayout-main::-webkit-scrollbar {
+      display: none;
+      /* 隐藏滚动条 */
+    }
+
+    .DefaultLayout-main {
+      -ms-overflow-style: none;
+      /* IE 和 Edge */
+      scrollbar-width: none;
+      /* Firefox */
     }
   }
 }
