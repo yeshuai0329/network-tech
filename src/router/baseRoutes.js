@@ -18,14 +18,14 @@ const baseRoutes = [
     path: '/',
     name: 'DefaultLayout',
     component: DefaultLayout,
-    redirect: "Home",
+    redirect: 'Home',
     children: [
       {
         path: 'Home',
         name: 'Home',
-        component: Home,
+        component: Home
       },
-       {
+      {
         path: 'Business',
         name: 'Business',
         component: Empty,
@@ -33,8 +33,8 @@ const baseRoutes = [
           {
             path: 'SMS',
             name: 'SMS',
-            component: SMS,
-          },
+            component: SMS
+          }
         ]
       },
       {
@@ -45,17 +45,17 @@ const baseRoutes = [
           {
             path: 'Account',
             name: 'Account',
-            component: Account,
+            component: Account
           },
-           {
+          {
             path: 'UserRoles',
             name: 'UserRoles',
-            component: UserRoles,
+            component: UserRoles
           }
         ]
-      },
+      }
     ]
-  },
+  }
 ]
 
 export default baseRoutes

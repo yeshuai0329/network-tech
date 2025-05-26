@@ -4,13 +4,10 @@ import baseRoutes from '@/router/baseRoutes'
 
 Vue.use(VueRouter)
 
-
 const router = new VueRouter({
   mode: 'history',
   routes: baseRoutes
 })
-
-
 
 // 解决菜单重复点击控制台报错
 const VueRouterPush = VueRouter.prototype.push

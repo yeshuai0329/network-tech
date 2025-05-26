@@ -15,14 +15,13 @@
 </template>
 
 <script>
-import Aside from "@/layout/Aside/index.vue";
+import Aside from '@/layout/Aside/index.vue'
 import Header from '@/layout/Header/index.vue'
 export default {
-  name: "DefaultLayout",
-  components: { Aside, Header },
-};
+  name: 'DefaultLayout',
+  components: { Aside, Header }
+}
 </script>
-
 
 <style lang="scss" scoped>
 .DefaultLayout {

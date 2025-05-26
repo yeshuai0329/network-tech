@@ -7,6 +7,6 @@
 <script>
 
 export default {
-  name:"ViewIndex",
+  name: 'ViewIndex'
 }
 </script>

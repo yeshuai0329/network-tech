@@ -20,9 +20,7 @@ router.beforeEach((to, from, next) => {
 
 // 修改title
 router.afterEach((to, from, next) => {
-  document.title = to.meta.title || '梦腾网络科技'
+  document.title = to.meta.title || '后台管理系统'
 })
-
-
 
 export default router

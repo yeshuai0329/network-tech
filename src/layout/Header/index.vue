@@ -11,18 +11,18 @@
 </template>
 
 <script>
-import Logo from "@/assets/images/logo.jpg";
-import UserInfo from "@/layout/Header/UserInfo/index.vue";
+import Logo from '@/assets/images/logo.jpg'
+import UserInfo from '@/layout/Header/UserInfo/index.vue'
 export default {
   components: {
     UserInfo
   },
-  data() {
+  data () {
     return {
       logo: Logo
-    };
+    }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

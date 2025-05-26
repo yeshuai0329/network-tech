@@ -22,19 +22,15 @@
 
 <script>
 export default {
-  name: "MenuTree",
-  props: ["mode", "clickHandler"],
-  mounted() {
-    console.log("mode", this.mode);
+  name: 'MenuTree',
+  props: ['mode', 'clickHandler'],
+  mounted () {
+    console.log('mode', this.mode)
   },
   methods: {
-    clickHandler(menuInfo) {
-      this.$router.push({
-        name: menuInfo.pathName
-      });
-    }
+
   }
-};
+}
 </script>
 
 <style>
