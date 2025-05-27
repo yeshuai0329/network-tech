@@ -31,15 +31,17 @@
       </el-table-column>
     </el-table>
 
-    <el-pagination
-      background
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-      :current-page="currentPage"
-      layout="total, sizes, prev, pager, next, jumper"
-      :total="400"
-    >
-    </el-pagination>
+    <div style="margin-top: 20px; text-align: center;">
+      <el-pagination
+        background
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="400"
+      >
+      </el-pagination>
+    </div>
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template functional>
-  <el-submenu :index="props.mode.id" :key="props.mode.id">
+  <el-submenu :index="`${props.mode.id}`" :key="props.mode.id">
     <template slot="title">
       <i :class="props.mode.menuIcon"></i>
       <span>{{ props.mode.menuName}}</span>
@@ -12,7 +12,7 @@
         :click-handler="props.clickHandler"
       />
 
-      <el-menu-item :index="menu.id" :key="menu.id" v-else @click="props.clickHandler(menu)">
+      <el-menu-item :index="`${menu.id}`" :key="menu.id" v-else @click="props.clickHandler(menu)">
         <i :class="menu.menuIcon"></i>
         <span slot="title">{{menu.menuName}}</span>
       </el-menu-item>

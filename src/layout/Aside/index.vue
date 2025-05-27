@@ -13,7 +13,7 @@
         @close="handleClose"
         :collapse="isCollapse"
       >
-        <template v-for="menuInfo in rightMenu">
+        <template v-for="menuInfo in allMenu">
           <MenuTree
             v-if="menuInfo.children && menuInfo.children.length"
             :key="menuInfo.id"
@@ -22,8 +22,8 @@
           />
 
           <el-menu-item
-            :index="menuInfo.id"
-            :key="menuInfo.id + 1"
+            :index="`${menuInfo.id}`"
+            :key="menuInfo.id"
             v-else
             @click="clickHandler(menuInfo)"
           >
@@ -40,54 +40,14 @@
 import MenuTree from '@/layout/Aside/MenuTree.vue'
 import Logo from '@/assets/images/logo.jpg'
 import { mapState } from 'vuex'
+import { allMenu } from '@/constant'
 export default {
   components: {
     MenuTree
   },
   data () {
     return {
-      rightMenu: [
-        {
-          id: '1',
-          pathName: 'Home',
-          menuName: '首页',
-          menuIcon: 'el-icon-s-home'
-        },
-        {
-          id: '2',
-          pathName: 'Business',
-          menuName: '业务管理',
-          menuIcon: 'el-icon-s-platform',
-          children: [
-            {
-              id: '3',
-              pathName: 'SMS',
-              menuName: '短信管理',
-              menuIcon: 'el-icon-chat-line-round'
-            }
-          ]
-        },
-        {
-          id: '4',
-          pathName: 'Config',
-          menuName: '系统设置',
-          menuIcon: 'el-icon-s-tools',
-          children: [
-            {
-              id: '5',
-              pathName: 'Account',
-              menuName: '账号管理',
-              menuIcon: 'el-icon-user-solid'
-            },
-            {
-              id: '6',
-              pathName: 'UserRoles',
-              menuName: '角色管理',
-              menuIcon: 'el-icon-user'
-            }
-          ]
-        }
-      ],
+      allMenu: allMenu,
       logo: Logo
     }
   },

@@ -1,11 +1,11 @@
 <template>
   <div class="Login">
     <div class="Login-content">
-      <h1 class="Login-content-title">后台管理系统</h1>
-      <el-form :model="ruleForm"  :rules="rules" ref="ruleForm"  class="Login-content-form">
-        <el-form-item  prop="account">
-          <el-input  placeholder="请输入账号" v-model="ruleForm.account"
-          @input="ruleForm.account=ruleForm.account.replace(/[^0-9]/g,'')"
+      <h1 class="Login-content-title">梦腾网络科技</h1>
+      <el-form :model="ruleForm"  :rules="rules" ref="ruleForm"  class="Login-content-form" @keyup.enter.native="submitForm('ruleForm')">
+        <el-form-item  prop="username">
+          <el-input  placeholder="请输入账号" v-model="ruleForm.username"
+          @input="ruleForm.username=ruleForm.username.replace(/[^0-9]/g,'')"
           maxlength="11"
           />
         </el-form-item>
@@ -13,7 +13,7 @@
           <el-input placeholder="请输入密码" type="password" v-model="ruleForm.password" show-password/>
         </el-form-item>
         <el-form-item>
-          <el-button :loading="loading" class="Login-content-submitBtn" type="primary" @click="submitForm('ruleForm')">登 陆</el-button>
+          <el-button :loading="loading" class="Login-content-submitBtn" type="primary" @click="submitForm('ruleForm')">登 录</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -21,18 +21,18 @@
 </template>
 
 <script>
-// import { loginApi } from '@/apis/login.js'
+import { loginApi } from '@/apis/login.js'
 
 export default {
   data () {
     return {
       ruleForm: {
-        account: '',
+        username: '',
         password: ''
       },
       loading: false,
       rules: {
-        account: [
+        username: [
           { required: true, message: '请输入账号', trigger: 'blur' }
         ],
         password: [
@@ -46,19 +46,20 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.loading = true
-          // loginApi(this.ruleForm).then((res) => {
-          //   console.log('res',res)
-          //   this.loading = false;
-          // }).catch(() => {
-          //   this.loading = false;
-          // })
-          localStorage.setItem('token', '1111111111111')
-          setTimeout(() => {
-            this.$router.push({
-              name: 'DefaultLayout'
-            })
+          loginApi(this.ruleForm).then((res) => {
+            if (res.data.code === 200) {
+              localStorage.setItem('token', res.data.data.token)
+              this.$router.push({
+                name: 'Home'
+              })
+              this.$message.success('登录成功!')
+            } else {
+              this.$message.error('登录失败!')
+            }
             this.loading = false
-          }, 1000)
+          }).catch(() => {
+            this.loading = false
+          })
         }
       })
     }

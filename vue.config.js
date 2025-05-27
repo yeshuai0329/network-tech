@@ -11,4 +11,15 @@ module.exports = defineConfig({
       }
     }
   }
+  // devServer: {
+  //   proxy: {
+  //     '/api': {
+  //       target: 'http://47.97.8.40:9000', // 后端API服务器地址
+  //       changeOrigin: true,
+  //       pathRewrite: {
+  //         '^/api': '' // 路径重写
+  //       }
+  //     }
+  //   }
+  // }
 })
