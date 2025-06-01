@@ -20,15 +20,11 @@
       </el-row>
     </el-form>
 
-    <el-table :data="tableData" border size="small">
-      <el-table-column fixed prop="date" label="手机编号" width="200">
-      </el-table-column>
-      <el-table-column prop="name" label="来信号码" width="250">
-      </el-table-column>
-      <el-table-column prop="province" label="短信内容" min-width="120">
-      </el-table-column>
-      <el-table-column prop="address" label="接收时间" width="200">
-      </el-table-column>
+    <el-table :data="tableData" border >
+      <el-table-column fixed prop="phone" label="手机编号" width="200"></el-table-column>
+      <el-table-column prop="from" label="来信号码" width="250"></el-table-column>
+      <el-table-column prop="sms" label="短信内容" min-width="120"></el-table-column>
+      <el-table-column prop="time" label="接收时间" width="200"></el-table-column>
     </el-table>
 
     <div style="margin-top: 20px; text-align: center;">
@@ -36,125 +32,75 @@
         background
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
-        :current-page="currentPage"
+        :current-page="pageInfo.pageNum"
         layout="total, sizes, prev, pager, next, jumper"
-        :total="400"
-      >
-      </el-pagination>
+        :total="pageInfo.total"
+      ></el-pagination>
     </div>
   </div>
 </template>
 
 <script>
+import { getSMSApi } from "@/apis/SMS.js";
 export default {
-  name: 'SMS',
+  name: "SMS",
 
-  data () {
+  data() {
     return {
       formInline: {
-        user: '',
-        region: ''
+        user: "",
+        region: ""
       },
-      currentPage: 1,
       tableData: [
-        {
-          date: '2016-05-02',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        },
-        {
-          date: '2016-05-04',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1517 弄',
-          zip: 200333
-        },
-        {
-          date: '2016-05-01',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1519 弄',
-          zip: 200333
-        },
-        {
-          date: '2016-05-03',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1516 弄',
-          zip: 200333
-        },
-        {
-          date: '2016-05-02',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        },
-        {
-          date: '2016-05-04',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1517 弄',
-          zip: 200333
-        },
-        {
-          date: '2016-05-01',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1519 弄',
-          zip: 200333
-        },
-        {
-          date: '2016-05-03',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1516 弄',
-          zip: 200333
-        },
-        {
-          date: '2016-05-02',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        },
-        {
-          date: '2016-05-04',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1517 弄',
-          zip: 200333
-        }
-      ]
-    }
+        
+      ],
+      pageInfo:{
+        pageNum:1,
+        pageSize:10,
+        total:0
+      }
+    };
+  },
+  mounted(){
+    this.getTableData()
   },
   methods: {
-    onSubmit () {
-      console.log('submit!')
+    getTableData() {
+      getSMSApi({
+        ...this.pageInfo
+      })
+        .then(res => {
+          if (res.data.code === 200) {
+            this.pageInfo.pageNum = Number(res.data.data.pageNum || 1)
+            this.pageInfo.pageSize = Number(res.data.data.pageSize || 10)
+            this.pageInfo.total = Number(res.data.data.total || 0)
+            this.tableData = res.data.data.records
+            console.log('res.data.code',res)
+          } else {
+            this.$message.error("登录失败!");
+          }
+        })
+        .catch(() => {
+        });
     },
-    handleClick (row) {
-      console.log(row)
+    onSubmit() {
+      console.log("submit!");
     },
-    handleSizeChange (val) {
-      console.log(`每页 ${val} 条`)
+    handleClick(row) {
+      console.log(row);
     },
-    handleCurrentChange (val) {
-      console.log(`当前页: ${val}`)
+    handleSizeChange(val) {
+      this.pageInfo.pageSize = val
+      this.getTableData()
+      console.log(`每页 ${val} 条`);
+    },
+    handleCurrentChange(val) {
+      this.pageInfo.pageNum = val
+      this.getTableData()
+      console.log(`当前页: ${val}`);
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

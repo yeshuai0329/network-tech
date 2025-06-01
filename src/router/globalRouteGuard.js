@@ -8,7 +8,7 @@ router.beforeEach((to, from, next) => {
     next()
   } else {
     const token = localStorage.getItem('token')
-    if (!token) {
+    if (!token && !to.meta.notNeedLogin) {
       next('/login')
     } else {
       next()

@@ -16,21 +16,28 @@ export const allMenu = [
       {
         id: 3,
         pathName: 'SMS',
-        menuName: '短信管理',
+        menuName: '短信息管理',
         menuIcon: 'el-icon-chat-line-round',
         permissionStr: 'Business:SMS'
+      },
+       {
+        id: 4,
+        pathName: 'SMSDataRules',
+        menuName: '短信数据规则',
+        menuIcon: 'el-icon-chat-line-round',
+        permissionStr: 'Business:SMSDataRules'
       }
     ]
   },
   {
-    id: 4,
+    id: 5,
     pathName: 'Config',
     menuName: '系统设置',
     menuIcon: 'el-icon-s-tools',
     permissionStr: 'Config',
     children: [
       {
-        id: 5,
+        id: 6,
         pathName: 'Account',
         menuName: '账号管理',
         menuIcon: 'el-icon-user-solid',
@@ -38,7 +45,7 @@ export const allMenu = [
 
       },
       {
-        id: 6,
+        id: 7,
         pathName: 'UserRoles',
         menuName: '角色管理',
         menuIcon: 'el-icon-user',
