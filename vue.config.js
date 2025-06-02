@@ -10,6 +10,20 @@ module.exports = defineConfig({
         '@': path.resolve(__dirname, 'src')
       }
     }
+  },
+  pages: {
+    bms: {
+      entry: 'src/bms/main.js',
+      template: 'public/bms.html',
+      filename: 'bms.html',
+      title: 'Vue Multi-Page Demo - Page 1',
+    }
+    // pubs: {
+    //   entry: 'src/pubs/main.js',
+    //   template: 'public/pubs.html',
+    //   filename: 'pubs.html',
+    //   title: 'Vue Multi-Page Demo - Page 2',
+    // }
   }
   // devServer: {
   //   proxy: {
