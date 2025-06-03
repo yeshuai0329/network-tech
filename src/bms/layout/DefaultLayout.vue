@@ -1,6 +1,6 @@
 <template>
   <div class="DefaultLayout">
-    <template v-if="route.meta.empty">
+    <template v-if="$route.meta.empty">
       <router-view></router-view>
     </template>
     <template v-else>

@@ -47,3 +47,34 @@ html,body,#app {
   height: 100%;
 }
 
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  scrollbar-width: none;
+}
+
+* {
+  -ms-overflow-style: none;
+}
+
+
+.el-menu,
+.el-menu--vertical {
+  border: 0px !important;
+
+  .el-menu-item:hover {
+    background: #052f58 !important;
+  }
+
+  .el-submenu__title:hover {
+    background: #052f58 !important;
+  }
+
+  .is-active {
+    background: #052f58 !important;
+  }
+}
+

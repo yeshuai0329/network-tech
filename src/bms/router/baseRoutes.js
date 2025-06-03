@@ -12,60 +12,54 @@ const SMS = () => import(/* webpackChunkName: "Login" */'@/bms/views/Business/SM
 
 const baseRoutes = [
   {
-    path: '/',
-    name: 'Root',
-    component: Empty,
-    redirect: 'User',
+    path: '/user',
+    name: 'User',
+    component: DefaultLayout,
     children: [
       {
-        path: 'user',
-        name: 'DefaultLayout',
+        path: 'login',
+        name: 'Login',
+        component: Login,
+        meta: {
+          empty: true,
+        }
+      },
+      {
+        path: 'home',
+        name: 'Home',
+        component: Home
+      },
+      {
+        path: 'business',
+        name: 'Business',
         component: Empty,
+        redirect: 'SMS',
         children: [
           {
-            path: 'login',
-            name: 'Login',
-            component: Login,
-            meta:{
-              empty: true,
-            }
-          },
-          {
-            path: 'home',
-            name: 'Home',
-            component: Home
-          },
-          {
-            path: 'business',
-            name: 'Business',
-            component: Empty,
-            children: [
-              {
-                path: 'sms',
-                name: 'SMS',
-                component: SMS
-              }
-            ]
-          },
-          {
-            path: 'config',
-            name: 'Config',
-            component: Empty,
-            children: [
-              {
-                path: 'account',
-                name: 'Account',
-                component: Account
-              },
-              {
-                path: 'userRoles',
-                name: 'UserRoles',
-                component: UserRoles
-              }
-            ]
+            path: 'sms',
+            name: 'SMS',
+            component: SMS
           }
         ]
       },
+      {
+        path: 'config',
+        name: 'Config',
+        component: Empty,
+        redirect: 'Account',
+        children: [
+          {
+            path: 'account',
+            name: 'Account',
+            component: Account
+          },
+          {
+            path: 'userRoles',
+            name: 'UserRoles',
+            component: UserRoles
+          }
+        ]
+      }
     ]
   },
 
