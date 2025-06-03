@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { getSMSApi } from "@/bms/apis/SMS.js";
+import { getSMSApi } from "@/apis/SMS.js";
 export default {
   name: "SMS",
 

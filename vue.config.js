@@ -16,14 +16,14 @@ module.exports = defineConfig({
       entry: 'src/bms/main.js',
       template: 'public/bms.html',
       filename: 'bms.html',
-      title: 'Vue Multi-Page Demo - Page 1',
+      title: '梦腾科技内部业务系统',
+    },
+    pubs: {
+      entry: 'src/pubs/main.js',
+      template: 'public/pubs.html',
+      filename: 'pubs.html',
+      title: '梦腾科技公开业务系统',
     }
-    // pubs: {
-    //   entry: 'src/pubs/main.js',
-    //   template: 'public/pubs.html',
-    //   filename: 'pubs.html',
-    //   title: 'Vue Multi-Page Demo - Page 2',
-    // }
   }
   // devServer: {
   //   proxy: {

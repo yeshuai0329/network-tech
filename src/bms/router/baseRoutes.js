@@ -1,3 +1,4 @@
+
 // 基础路由文件
 const DefaultLayout = () => import(/* webpackChunkName: "Login" */'@/bms/layout/DefaultLayout.vue')
 const Layout2 = () => import(/* webpackChunkName: "Login" */'@/bms/layout/Layout2/index.vue')
@@ -11,52 +12,63 @@ const SMS = () => import(/* webpackChunkName: "Login" */'@/bms/views/Business/SM
 
 const baseRoutes = [
   {
-    path: 'Login',
-    name: 'Login',
-    component: Login
-  },
-  {
-    path: 'home',
-    name: 'DefaultLayout',
-    component: DefaultLayout,
-    redirect: 'Home',
+    path: '/',
+    name: 'Root',
+    component: Empty,
+    redirect: 'User',
     children: [
       {
-        path: 'Home',
-        name: 'Home',
-        component: Home
-      },
-      {
-        path: 'Business',
-        name: 'Business',
+        path: 'user',
+        name: 'DefaultLayout',
         component: Empty,
         children: [
           {
-            path: 'SMS',
-            name: 'SMS',
-            component: SMS
-          }
-        ]
-      },
-      {
-        path: 'Config',
-        name: 'Config',
-        component: Empty,
-        children: [
-          {
-            path: 'Account',
-            name: 'Account',
-            component: Account
+            path: 'login',
+            name: 'Login',
+            component: Login,
+            meta:{
+              empty: true,
+            }
           },
           {
-            path: 'UserRoles',
-            name: 'UserRoles',
-            component: UserRoles
+            path: 'home',
+            name: 'Home',
+            component: Home
+          },
+          {
+            path: 'business',
+            name: 'Business',
+            component: Empty,
+            children: [
+              {
+                path: 'sms',
+                name: 'SMS',
+                component: SMS
+              }
+            ]
+          },
+          {
+            path: 'config',
+            name: 'Config',
+            component: Empty,
+            children: [
+              {
+                path: 'account',
+                name: 'Account',
+                component: Account
+              },
+              {
+                path: 'userRoles',
+                name: 'UserRoles',
+                component: UserRoles
+              }
+            ]
           }
         ]
-      }
+      },
     ]
   },
+
 
 ]
 

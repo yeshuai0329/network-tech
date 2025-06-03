@@ -38,7 +38,7 @@
 
 <script>
 import MenuTree from '@/bms/layout/Aside/MenuTree.vue'
-import Logo from '@/bms/assets/images/logo.jpg'
+import Logo from '@/assets/images/logo.jpg'
 import { mapState } from 'vuex'
 import { allMenu } from '@/bms/constant'
 export default {

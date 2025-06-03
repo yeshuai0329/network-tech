@@ -1,26 +1,31 @@
 <template>
   <div class="DefaultLayout">
-    <div class="DefaultLayout-Aside">
-      <Aside />
-    </div>
-    <div class="DefaultLayout-right">
-      <div class="DefaultLayout-Header">
-        <Header />
+    <template v-if="route.meta.empty">
+      <router-view></router-view>
+    </template>
+    <template v-else>
+      <div class="DefaultLayout-Aside">
+        <Aside />
       </div>
-      <div class="DefaultLayout-main">
-        <router-view></router-view>
+      <div class="DefaultLayout-right">
+        <div class="DefaultLayout-Header">
+          <Header />
+        </div>
+        <div class="DefaultLayout-main">
+          <router-view></router-view>
+        </div>
       </div>
-    </div>
+    </template>
   </div>
 </template>
 
 <script>
-import Aside from '@/bms/layout/Aside/index.vue'
-import Header from '@/bms/layout/Header/index.vue'
+import Aside from "@/bms/layout/Aside/index.vue";
+import Header from "@/bms/layout/Header/index.vue";
 export default {
-  name: 'DefaultLayout',
-  components: { Aside, Header }
-}
+  name: "DefaultLayout",
+  components: { Aside, Header },
+};
 </script>
 
 <style lang="scss" scoped>
