@@ -37,7 +37,7 @@ router.beforeEach((to, from, next) => {
 
 // 修改title
 router.afterEach((to, from, next) => {
-  document.title = to.meta.title || '梦腾科技公开系统'
+  document.title = to.meta.title || '梦腾科技公开业务系统'
 })
 
 

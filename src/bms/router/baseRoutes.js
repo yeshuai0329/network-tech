@@ -9,6 +9,7 @@ const Home = () => import(/* webpackChunkName: "Login" */'@/bms/views/Home/Home.
 const Account = () => import(/* webpackChunkName: "Login" */'@/bms/views/Config/Account/index.vue')
 const UserRoles = () => import(/* webpackChunkName: "Login" */'@/bms/views/Config/UserRoles/index.vue')
 const SMS = () => import(/* webpackChunkName: "Login" */'@/bms/views/Business/SMS/index.vue')
+const SMSDataRules = () => import(/* webpackChunkName: "Login" */'@/bms/views/Business/SMSDataRules/index.vue')
 
 const baseRoutes = [
   {
@@ -39,7 +40,13 @@ const baseRoutes = [
             path: 'sms',
             name: 'SMS',
             component: SMS
+          },
+            {
+            path: 'smsDataRules',
+            name: 'SMSDataRules',
+            component: SMSDataRules
           }
+
         ]
       },
       {

@@ -1,20 +1,20 @@
 <template>
   <div class="main">
-    <el-form :model="formInline">
+    <el-form :model="formInline" @keyup.enter.native="searchForm">
       <el-row :gutter="20">
         <el-col :span="5">
           <el-form-item>
-            <el-input v-model="formInline.user" placeholder="手机编号" />
+            <el-input v-model="formInline.phone" placeholder="手机编号" clearable />
           </el-form-item>
         </el-col>
         <el-col :span="5">
           <el-form-item>
-            <el-input v-model="formInline.user" placeholder="来信号码" />
+            <el-input v-model="formInline.from" placeholder="来信号码" clearable/>
           </el-form-item>
         </el-col>
         <el-col :span="3">
           <el-form-item>
-            <el-button type="primary" @click="onSubmit">查询</el-button>
+            <el-button type="primary" @click="searchForm">查询</el-button>
           </el-form-item>
         </el-col>
       </el-row>
@@ -41,18 +41,17 @@
 </template>
 
 <script>
-import { getSMSApi } from "@/apis/SMS.js";
+import { getSMSApi } from "@/bms/apis/SMS.js";
 export default {
   name: "SMS",
 
   data() {
     return {
       formInline: {
-        user: "",
-        region: ""
+        phone: "",
+        from: ""
       },
       tableData: [
-        
       ],
       pageInfo:{
         pageNum:1,
@@ -67,6 +66,7 @@ export default {
   methods: {
     getTableData() {
       getSMSApi({
+        ...this.formInline,
         ...this.pageInfo
       })
         .then(res => {
@@ -83,21 +83,16 @@ export default {
         .catch(() => {
         });
     },
-    onSubmit() {
-      console.log("submit!");
-    },
-    handleClick(row) {
-      console.log(row);
+    searchForm() {
+          this.getTableData()
     },
     handleSizeChange(val) {
       this.pageInfo.pageSize = val
       this.getTableData()
-      console.log(`每页 ${val} 条`);
     },
     handleCurrentChange(val) {
       this.pageInfo.pageNum = val
       this.getTableData()
-      console.log(`当前页: ${val}`);
     }
   }
 };

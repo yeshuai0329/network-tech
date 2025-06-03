@@ -2,7 +2,7 @@
   <div class="Aside">
     <!-- <div class="Aside-logo">
       <img :src="logo" alt />
-    </div> -->
+    </div>-->
     <div class="Aside-Menu">
       <el-menu
         default-active="2"
@@ -37,38 +37,38 @@
 </template>
 
 <script>
-import MenuTree from '@/bms/layout/Aside/MenuTree.vue'
-import Logo from '@/assets/images/logo.jpg'
-import { mapState } from 'vuex'
-import { allMenu } from '@/bms/constant'
+import MenuTree from "@/bms/layout/Aside/MenuTree.vue";
+import Logo from "@/bms/assets/images/logo.jpg";
+import { mapState } from "vuex";
+import { allMenu } from "@/bms/constant";
 export default {
   components: {
     MenuTree
   },
-  data () {
+  data() {
     return {
       allMenu: allMenu,
       logo: Logo
-    }
+    };
   },
   computed: {
-    ...mapState('menu', ['isCollapse'])
+    ...mapState("menu", ["isCollapse"])
   },
   methods: {
-    handleOpen (key, keyPath) {
-      console.log(key, keyPath)
+    handleOpen(key, keyPath) {
+      console.log(key, keyPath);
     },
-    handleClose (key, keyPath) {
-      console.log(key, keyPath)
+    handleClose(key, keyPath) {
+      console.log(key, keyPath);
     },
-    clickHandler (menuInfo) {
-      console.log('menuInfo', menuInfo)
+    clickHandler(menuInfo) {
+      console.log("menuInfo", menuInfo);
       this.$router.push({
         name: menuInfo.pathName
-      })
+      });
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -87,19 +87,11 @@ export default {
       object-fit: cover;
     }
   }
+  
   .Aside-Menu {
     width: 100%;
     flex: 1;
     overflow-y: scroll;
-
-    .Aside-Menu::-webkit-scrollbar {
-      display: none; /* 隐藏滚动条 */
-    }
-
-    .Aside-Menu {
-      -ms-overflow-style: none; /* IE 和 Edge */
-      scrollbar-width: none; /* Firefox */
-    }
 
     .el-menu {
       border: 0px !important;
@@ -118,6 +110,15 @@ export default {
       width: 200px;
       min-height: 600px;
     }
+  }
+
+  .Aside-Menu::-webkit-scrollbar {
+    display: none; /* 隐藏滚动条 */
+  }
+
+  .Aside-Menu {
+    -ms-overflow-style: none; /* IE 和 Edge */
+    scrollbar-width: none; /* Firefox */
   }
 }
 </style>

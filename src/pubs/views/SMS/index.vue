@@ -1,30 +1,10 @@
 <template>
   <div class="main">
-    <el-form :model="formInline">
-      <el-row :gutter="20">
-        <el-col :span="5">
-          <el-form-item>
-            <el-input v-model="formInline.user" placeholder="手机编号" />
-          </el-form-item>
-        </el-col>
-        <el-col :span="5">
-          <el-form-item>
-            <el-input v-model="formInline.user" placeholder="来信号码" />
-          </el-form-item>
-        </el-col>
-        <el-col :span="3">
-          <el-form-item>
-            <el-button type="primary" @click="onSubmit">查询</el-button>
-          </el-form-item>
-        </el-col>
-      </el-row>
-    </el-form>
-
-    <el-table :data="tableData" border >
-      <el-table-column fixed prop="phone" label="手机编号" width="200"></el-table-column>
-      <el-table-column prop="from" label="来信号码" width="250"></el-table-column>
-      <el-table-column prop="sms" label="短信内容" min-width="120"></el-table-column>
-      <el-table-column prop="time" label="接收时间" width="200"></el-table-column>
+    <el-table :data="tableData" border style="width:100%">
+      <el-table-column fixed prop="phone" label="手机编号" width="300"></el-table-column>
+      <el-table-column prop="from" label="来信号码" width="300"></el-table-column>
+      <el-table-column prop="sms" label="短信内容" min-width="300"></el-table-column>
+      <el-table-column prop="time" label="接收时间" width="300"></el-table-column>
     </el-table>
 
     <div style="margin-top: 20px; text-align: center;">
@@ -41,70 +21,62 @@
 </template>
 
 <script>
-import { getSMSApi } from "@/apis/SMS.js";
+import { getSmsListByRole } from "@/pubs/apis/SMS.js";
 export default {
   name: "SMS",
 
   data() {
     return {
-      formInline: {
-        user: "",
-        region: ""
-      },
-      tableData: [
-        
-      ],
-      pageInfo:{
-        pageNum:1,
-        pageSize:10,
-        total:0
+      tableData: [],
+      code: "",
+      pageInfo: {
+        pageNum: 1,
+        pageSize: 10,
+        total: 0
       }
     };
   },
-  mounted(){
-    this.getTableData()
+  mounted() {
+    this.code = this.$route.query.code || null;
+    if (this.code) {
+      this.getTableData();
+    }
   },
   methods: {
     getTableData() {
-      getSMSApi({
+      getSmsListByRole({
+        roleCode: this.code,
         ...this.pageInfo
-      })
-        .then(res => {
-          if (res.data.code === 200) {
-            this.pageInfo.pageNum = Number(res.data.data.pageNum || 1)
-            this.pageInfo.pageSize = Number(res.data.data.pageSize || 10)
-            this.pageInfo.total = Number(res.data.data.total || 0)
-            this.tableData = res.data.data.records
-            console.log('res.data.code',res)
-          } else {
-            this.$message.error("登录失败!");
-          }
-        })
-        .catch(() => {
-        });
+      }).then(res => {
+        if (res.data.code === 200) {
+          this.pageInfo.pageNum = Number(res.data.data.pageNum || 1);
+          this.pageInfo.pageSize = Number(res.data.data.pageSize || 10);
+          this.pageInfo.total = Number(res.data.data.total || 0);
+          this.tableData = res.data.data.records;
+        }
+      });
     },
-    onSubmit() {
-      console.log("submit!");
-    },
-    handleClick(row) {
-      console.log(row);
-    },
+
     handleSizeChange(val) {
-      this.pageInfo.pageSize = val
-      this.getTableData()
-      console.log(`每页 ${val} 条`);
+      this.pageInfo.pageSize = val;
+      this.getTableData();
     },
     handleCurrentChange(val) {
-      this.pageInfo.pageNum = val
-      this.getTableData()
-      console.log(`当前页: ${val}`);
+      this.pageInfo.pageNum = val;
+      this.getTableData();
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.main {
+#app {
   width: 100%;
+  text-align: center;
+  .main {
+    width:90%;
+    padding: 40px 100px;
+    height: 100%;
+  }
 }
 </style>

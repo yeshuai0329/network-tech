@@ -130,10 +130,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.main {
-  width: 100%;
-  .main-topBtn {
-    margin: 10px 0px;
-  }
-}
+
 </style>

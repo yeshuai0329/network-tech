@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { loginApi } from '@/apis/login.js'
+import { loginApi } from '@/bms/apis/login.js'
 
 export default {
   data () {
@@ -69,7 +69,7 @@ export default {
 
 <style lang="sass" scoped>
   .Login {
-    background: url('../.././../assets/images/loginBg.jpg');
+    background: url('../../assets/images/loginBg.jpg');
     width: 100%;
     height: 100%;
     display: flex;
