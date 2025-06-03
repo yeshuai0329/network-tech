@@ -5,13 +5,14 @@
     </div>-->
     <div class="Aside-Menu">
       <el-menu
-        default-active="2"
+        :default-active="defaultActive"
         background-color="rgb(0, 21, 41)"
         text-color="#FFF"
         class="el-menu-vertical-demo"
         @open="handleOpen"
         @close="handleClose"
         :collapse="isCollapse"
+        :unique-opened="true"
       >
         <template v-for="menuInfo in allMenu">
           <MenuTree
@@ -39,8 +40,9 @@
 <script>
 import MenuTree from "@/bms/layout/Aside/MenuTree.vue";
 import Logo from "@/bms/assets/images/logo.jpg";
-import { mapState } from "vuex";
+import { mapState, mapActions} from "vuex";
 import { allMenu } from "@/bms/constant";
+
 export default {
   components: {
     MenuTree
@@ -52,9 +54,10 @@ export default {
     };
   },
   computed: {
-    ...mapState("menu", ["isCollapse"])
+    ...mapState("menu", ["isCollapse", "defaultActive"])
   },
   methods: {
+    ...mapActions('menu', ['defaultActiveAct']),
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
     },
@@ -62,7 +65,6 @@ export default {
       console.log(key, keyPath);
     },
     clickHandler(menuInfo) {
-      console.log("menuInfo", menuInfo);
       this.$router.push({
         name: menuInfo.pathName
       });

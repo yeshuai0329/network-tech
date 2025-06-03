@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import baseRoutes from '@/bms/router/baseRoutes'
+import store from '../store'
 
 Vue.use(VueRouter)
 
@@ -38,8 +39,10 @@ router.beforeEach((to, from, next) => {
 // --------------------------------------------------- 全局后置守卫 -------------------------------------------------/
 
 // 修改title
-router.afterEach((to, from, next) => {
+router.afterEach((to, from) => {
   document.title = to.meta.title || '梦腾科技内部业务系统'
+  store.dispatch('menu/defaultActiveAct',to.meta.defaultActive)
+
 })
 
 

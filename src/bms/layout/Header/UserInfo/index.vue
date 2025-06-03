@@ -6,7 +6,7 @@
       <i class="el-icon-caret-bottom"></i>
     </span>
     <el-dropdown-menu slot="dropdown">
-      <el-dropdown-item>退出登陆</el-dropdown-item>
+      <el-dropdown-item @click.native="logOff">退出登陆</el-dropdown-item>
     </el-dropdown-menu>
   </el-dropdown>
 </template>
@@ -15,6 +15,15 @@
 export default {
   data () {
     return {}
+  },
+  methods:{
+    logOff() {
+      console.log('11111111')
+      localStorage.clear()
+      this.$router.push({
+        name:"Login"
+      })
+    }
   }
 }
 </script>

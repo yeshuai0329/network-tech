@@ -28,25 +28,36 @@ const baseRoutes = [
       {
         path: 'home',
         name: 'Home',
-        component: Home
+        component: Home,
+        meta: {
+          defaultActive: '1',
+        }
       },
       {
         path: 'business',
         name: 'Business',
         component: Empty,
         redirect: 'SMS',
+        meta: {
+          defaultActive: '2',
+        },
         children: [
           {
             path: 'sms',
             name: 'SMS',
-            component: SMS
+            component: SMS,
+            meta: {
+              defaultActive: '3',
+            }
           },
-            {
+          {
             path: 'smsDataRules',
             name: 'SMSDataRules',
-            component: SMSDataRules
+            component: SMSDataRules,
+            meta: {
+              defaultActive: '4',
+            }
           }
-
         ]
       },
       {
@@ -54,16 +65,25 @@ const baseRoutes = [
         name: 'Config',
         component: Empty,
         redirect: 'Account',
+        meta: {
+          defaultActive: '5',
+        },
         children: [
           {
             path: 'account',
             name: 'Account',
-            component: Account
+            component: Account,
+            meta: {
+              defaultActive: '6',
+            }
           },
           {
             path: 'userRoles',
             name: 'UserRoles',
-            component: UserRoles
+            component: UserRoles,
+            meta: {
+              defaultActive: '7',
+            }
           }
         ]
       }
