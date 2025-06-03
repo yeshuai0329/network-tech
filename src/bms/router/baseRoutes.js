@@ -1,7 +1,6 @@
 
 // 基础路由文件
 const DefaultLayout = () => import(/* webpackChunkName: "Login" */'@/bms/layout/DefaultLayout.vue')
-const Layout2 = () => import(/* webpackChunkName: "Login" */'@/bms/layout/Layout2/index.vue')
 const Empty = () => import(/* webpackChunkName: "Login" */'@/bms/router/Empty.vue')
 //
 const Login = () => import(/* webpackChunkName: "Login" */'@/bms/views/Login/Login.vue')
@@ -37,7 +36,7 @@ const baseRoutes = [
         path: 'business',
         name: 'Business',
         component: Empty,
-        redirect: 'SMS',
+        redirect: {name:"SMS"},
         meta: {
           defaultActive: '2',
         },
@@ -64,7 +63,7 @@ const baseRoutes = [
         path: 'config',
         name: 'Config',
         component: Empty,
-        redirect: 'Account',
+        redirect: {name:"Account"},
         meta: {
           defaultActive: '5',
         },
