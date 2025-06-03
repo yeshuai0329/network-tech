@@ -1,14 +1,14 @@
 
 // 基础路由文件
-const DefaultLayout = () => import(/* webpackChunkName: "Login" */'@/bms/layout/DefaultLayout.vue')
-const Empty = () => import(/* webpackChunkName: "Login" */'@/bms/router/Empty.vue')
+const DefaultLayout = () => import(/* webpackChunkName: "DefaultLayout" */'@/bms/layout/DefaultLayout.vue')
+const Empty = () => import(/* webpackChunkName: "Empty" */'@/bms/router/Empty.vue')
 //
 const Login = () => import(/* webpackChunkName: "Login" */'@/bms/views/Login/Login.vue')
-const Home = () => import(/* webpackChunkName: "Login" */'@/bms/views/Home/Home.vue')
-const Account = () => import(/* webpackChunkName: "Login" */'@/bms/views/Config/Account/index.vue')
-const UserRoles = () => import(/* webpackChunkName: "Login" */'@/bms/views/Config/UserRoles/index.vue')
-const SMS = () => import(/* webpackChunkName: "Login" */'@/bms/views/Business/SMS/index.vue')
-const SMSDataRules = () => import(/* webpackChunkName: "Login" */'@/bms/views/Business/SMSDataRules/index.vue')
+const Home = () => import(/* webpackChunkName: "Home" */'@/bms/views/Home/Home.vue')
+const Account = () => import(/* webpackChunkName: "Account" */'@/bms/views/Config/Account/index.vue')
+const UserRoles = () => import(/* webpackChunkName: "UserRoles" */'@/bms/views/Config/UserRoles/index.vue')
+const SMS = () => import(/* webpackChunkName: "SMS" */'@/bms/views/Business/SMS/index.vue')
+const SMSDataRules = () => import(/* webpackChunkName: "SMSDataRules" */'@/bms/views/Business/SMSDataRules/index.vue')
 
 const baseRoutes = [
   {
