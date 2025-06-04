@@ -152,6 +152,7 @@ export default {
     AddSmsDataRules() {
       this.SmsDataRulesDetailType = "add";
       this.visibleSmsDataRule = true;
+      this.row = {}
     },
     editSmsDataRules(row) {
       this.SmsDataRulesDetailType = "edit";

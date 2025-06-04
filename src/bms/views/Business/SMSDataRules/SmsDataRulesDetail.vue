@@ -64,11 +64,10 @@ export default {
       handler() {
         if (this.visible) {
           if (this.type === "add") {
-            console.log("add");
+            
           }
           if (this.type === "edit") {
-            console.log("edit");
-            this.form = this.row;
+            this.form = {...this.form,...this.row}
           }
         }
       },
@@ -126,6 +125,14 @@ export default {
     },
     cancel() {
       this.$emit("update:visible", false);
+      this.form= {
+        id: "",
+        fromList: [],
+        phoneList: [],
+        smsContainList: [],
+        smsNotContainList: [],
+        status: 1
+      },
       this.getTableData()
     }
   }

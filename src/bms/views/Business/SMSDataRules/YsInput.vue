@@ -34,9 +34,14 @@ export default {
   },
   methods: {
     add() {
-      this.valList.push(this.val);
-      this.val = "";
-      this.$emit("update:change", this.valList);
+      if(this.val){
+        this.valList.push(this.val);
+        this.val = "";
+        this.$emit("update:change", this.valList);
+      } else {
+        this.$message.warning(this.placeholder)
+      }
+    
     },
     close(index) {
       this.valList.splice(index,1);

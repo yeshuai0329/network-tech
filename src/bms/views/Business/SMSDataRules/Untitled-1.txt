@@ -2,6 +2,7 @@
   增加一个参数 status 是否启用 1 0
 2.获取SmsDataRules分页列表
   增加一个查询参数 code
+  返回的字段比如phoneList现在是默认null  能不能返回[]
 3.修改SmsDataRules对象 
   报错 501
 
