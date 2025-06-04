@@ -75,8 +75,8 @@
       </el-table-column>
       <el-table-column fixed="right" align="center" label="操作" min-width="300">
         <template slot-scope="scope">
-          <el-button type="primary" size="small" @click="editSmsDataRules(scope.row)">编辑</el-button>
-          <el-button type="primary" size="small" @click="copyLink(scope.row.code)">链接</el-button>
+          <el-button size="small" @click="editSmsDataRules(scope.row)">编辑</el-button>
+          <el-button type="primary" size="small" @click="copyLink(scope.row.code)">预览</el-button>
           <el-button v-if="scope.row.status === 0" type="success" size="small">启用</el-button>
           <el-button v-if="scope.row.status === 1" type="warning" size="small">禁用</el-button>
           <el-button type="danger" size="small" @click="delSmsDataRules(scope.row.id)">删除</el-button>
@@ -181,8 +181,9 @@ export default {
       });
     },
     copyLink(code) {
-      this.$copyText(`http://localhost:8080/pubs/sms?code=${code}`).then(
+      this.$copyText(`${location.origin}/pubs/sms?code=${code}`).then(
         e => {
+          window.open(`${location.origin}/pubs/sms?code=${code}`,"_blank")
           this.$message.success("复制成功！");
         },
         e => {
