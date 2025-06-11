@@ -15,13 +15,14 @@ const baseRoutes = [
     path: '/user',
     name: 'User',
     component: DefaultLayout,
+    redirect: { name: 'Home' },
     children: [
       {
         path: 'login',
         name: 'Login',
         component: Login,
         meta: {
-          empty: true,
+          empty: true
         }
       },
       {
@@ -29,16 +30,16 @@ const baseRoutes = [
         name: 'Home',
         component: Home,
         meta: {
-          defaultActive: '1',
+          defaultActive: '1'
         }
       },
       {
         path: 'business',
         name: 'Business',
         component: Empty,
-        redirect: {name:"SMS"},
+        redirect: { name: 'SMS' },
         meta: {
-          defaultActive: '2',
+          defaultActive: '2'
         },
         children: [
           {
@@ -46,7 +47,7 @@ const baseRoutes = [
             name: 'SMS',
             component: SMS,
             meta: {
-              defaultActive: '3',
+              defaultActive: '3'
             }
           },
           {
@@ -54,7 +55,7 @@ const baseRoutes = [
             name: 'SMSDataRules',
             component: SMSDataRules,
             meta: {
-              defaultActive: '4',
+              defaultActive: '4'
             }
           }
         ]
@@ -63,9 +64,9 @@ const baseRoutes = [
         path: 'config',
         name: 'Config',
         component: Empty,
-        redirect: {name:"Account"},
+        redirect: { name: 'Account' },
         meta: {
-          defaultActive: '5',
+          defaultActive: '5'
         },
         children: [
           {
@@ -73,7 +74,7 @@ const baseRoutes = [
             name: 'Account',
             component: Account,
             meta: {
-              defaultActive: '6',
+              defaultActive: '6'
             }
           },
           {
@@ -81,14 +82,13 @@ const baseRoutes = [
             name: 'UserRoles',
             component: UserRoles,
             meta: {
-              defaultActive: '7',
+              defaultActive: '7'
             }
           }
         ]
       }
     ]
-  },
-
+  }
 
 ]
 

@@ -7,7 +7,7 @@ Vue.use(VueRouter)
 
 const router = new VueRouter({
   mode: 'history',
-  base:'/bms',
+  base: '/bms',
   routes: baseRoutes
 })
 
@@ -20,10 +20,12 @@ VueRouter.prototype.push = function push (to) {
 // --------------------------------------------------- 全局前置守卫 -------------------------------------------------/
 // 判断用户是否登录
 router.beforeEach((to, from, next) => {
-  // 如果是去login 页面,放行
-  if (to.path === '/' || to.path === '/user') {
-    next('/user/home')
+  // 重定向路由
+  if (to.path === '/') {
+    next('/user')
   }
+
+  // 如果是去login 页面,放行
   if (to.path === '/user/login') {
     next()
   } else {
@@ -41,9 +43,6 @@ router.beforeEach((to, from, next) => {
 // 修改title
 router.afterEach((to, from) => {
   document.title = to.meta.title || '梦腾科技内部业务系统'
-  store.dispatch('menu/defaultActiveAct',to.meta.defaultActive)
-
+  store.dispatch('menu/defaultActiveAct', to.meta.defaultActive)
 })
-
-
 export default router
