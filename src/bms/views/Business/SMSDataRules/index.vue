@@ -181,8 +181,9 @@ export default {
       });
     },
     copyLink(code) {
-      this.$copyText(`http://localhost:8080/pubs/sms?code=${code}`).then(
+      this.$copyText(`${location.origin}/pubs/sms?code=${code}`).then(
         e => {
+          window.open(`${location.origin}/pubs/sms?code=${code}`,"_blank")
           this.$message.success("复制成功！");
         },
         e => {
