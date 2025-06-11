@@ -4,12 +4,20 @@
       <el-row :gutter="20">
         <el-col :span="5">
           <el-form-item>
-            <el-input v-model="formInline.phone" placeholder="手机编号" clearable />
+            <el-input
+              v-model="formInline.phone"
+              placeholder="手机编号"
+              clearable
+            />
           </el-form-item>
         </el-col>
         <el-col :span="5">
           <el-form-item>
-            <el-input v-model="formInline.from" placeholder="来信号码" clearable/>
+            <el-input
+              v-model="formInline.from"
+              placeholder="来信号码"
+              clearable
+            />
           </el-form-item>
         </el-col>
         <el-col :span="3">
@@ -20,14 +28,39 @@
       </el-row>
     </el-form>
 
-    <el-table :data="tableData" border >
-      <el-table-column fixed prop="phone" label="手机编号" width="200"></el-table-column>
-      <el-table-column prop="from" label="来信号码" width="250"></el-table-column>
-      <el-table-column prop="sms" label="短信内容" min-width="120"></el-table-column>
-      <el-table-column prop="time" label="接收时间" width="200"></el-table-column>
+    <el-table :data="tableData" border>
+      <el-table-column
+        fixed
+        type="index"
+        :index="tableIndex"
+        align="center"
+        label="序号"
+        width="60"
+      ></el-table-column>
+      <el-table-column
+        fixed
+        prop="phone"
+        label="手机编号"
+        width="200"
+      ></el-table-column>
+      <el-table-column
+        prop="from"
+        label="来信号码"
+        width="250"
+      ></el-table-column>
+      <el-table-column
+        prop="sms"
+        label="短信内容"
+        min-width="120"
+      ></el-table-column>
+      <el-table-column
+        prop="time"
+        label="接收时间"
+        width="200"
+      ></el-table-column>
     </el-table>
 
-    <div style="margin-top: 20px; text-align: center;">
+    <div style="margin-top: 20px; text-align: center">
       <el-pagination
         background
         @size-change="handleSizeChange"
@@ -41,61 +74,60 @@
 </template>
 
 <script>
-import { getSMSApi } from "@/bms/apis/SMS.js";
+import { getSMSApi } from '@/bms/apis/SMS.js'
 export default {
-  name: "SMS",
+  name: 'SMS',
 
-  data() {
+  data () {
     return {
       formInline: {
-        phone: "",
-        from: ""
+        phone: '',
+        from: ''
       },
-      tableData: [
-      ],
-      pageInfo:{
-        pageNum:1,
-        pageSize:10,
-        total:0
+      tableData: [],
+      pageInfo: {
+        pageNum: 1,
+        pageSize: 10,
+        total: 0
       }
-    };
+    }
   },
-  mounted(){
+  mounted () {
     this.getTableData()
   },
   methods: {
-    getTableData() {
+    tableIndex (index) {
+      return (this.pageInfo.pageNum - 1) * this.pageInfo.pageSize + 1 + index
+    },
+    getTableData () {
       getSMSApi({
         ...this.formInline,
         ...this.pageInfo
       })
-        .then(res => {
+        .then((res) => {
           if (res.data.code === 200) {
-            this.pageInfo.pageNum = Number(res.data.data.pageNum || 1)
-            this.pageInfo.pageSize = Number(res.data.data.pageSize || 10)
             this.pageInfo.total = Number(res.data.data.total || 0)
             this.tableData = res.data.data.records
-            console.log('res.data.code',res)
+            console.log('res.data.code', res)
           } else {
-            this.$message.error("登录失败!");
+            this.$message.error('登录失败!')
           }
         })
-        .catch(() => {
-        });
+        .catch(() => {})
     },
-    searchForm() {
-          this.getTableData()
+    searchForm () {
+      this.getTableData()
     },
-    handleSizeChange(val) {
+    handleSizeChange (val) {
       this.pageInfo.pageSize = val
       this.getTableData()
     },
-    handleCurrentChange(val) {
+    handleCurrentChange (val) {
       this.pageInfo.pageNum = val
       this.getTableData()
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

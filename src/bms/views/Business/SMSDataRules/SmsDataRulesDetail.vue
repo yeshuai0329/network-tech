@@ -1,17 +1,39 @@
 <template>
-  <el-dialog :title="title" :visible="visible" center :show-close="false" width="40%">
+  <el-dialog
+    :title="title"
+    :visible="visible"
+    center
+    :show-close="false"
+    width="40%"
+  >
     <el-form ref="form" :model="form" label-width="160px">
       <el-form-item label="手机编号：" prop="phoneList">
-        <YsInput v-model="form.phoneList" placeholder="请输入手机编号" clearable />
+        <YsInput
+          v-model="form.phoneList"
+          placeholder="请输入手机编号"
+          clearable
+        />
       </el-form-item>
       <el-form-item label="来信号码：" prop="fromList">
-        <YsInput v-model="form.fromList" placeholder="请输入来信号码" clearable />
+        <YsInput
+          v-model="form.fromList"
+          placeholder="请输入来信号码"
+          clearable
+        />
       </el-form-item>
       <el-form-item label="关键字(包含)：" prop="smsContainList">
-        <YsInput v-model="form.smsContainList" placeholder="请输入关键字(包含)" clearable />
+        <YsInput
+          v-model="form.smsContainList"
+          placeholder="请输入关键字(包含)"
+          clearable
+        />
       </el-form-item>
       <el-form-item label="关键字(排除)：" prop="smsNotContainList">
-        <YsInput v-model="form.smsNotContainList" placeholder="请输入关键字(排除)" clearable />
+        <YsInput
+          v-model="form.smsNotContainList"
+          placeholder="请输入关键字(排除)"
+          clearable
+        />
       </el-form-item>
       <el-form-item label="规则状态：" prop="status">
         <el-switch
@@ -26,30 +48,32 @@
 
     <span slot="footer" class="dialog-footer">
       <el-button @click="cancel">取 消</el-button>
-      <el-button type="primary" :loading="loading" @click="submitForm('form')">确 定</el-button>
+      <el-button type="primary" :loading="loading" @click="submitForm('form')"
+        >确 定</el-button
+      >
     </span>
   </el-dialog>
 </template>
 
 <script>
-import YsInput from "@/bms/views/Business/SMSDataRules/YsInput.vue";
-import { addSmsDataRulesApi ,editSmsDataRulesApi} from "@/bms/apis/SMS.js";
+import YsInput from '@/bms/views/Business/SMSDataRules/YsInput.vue'
+import { addSmsDataRulesApi, editSmsDataRulesApi } from '@/bms/apis/SMS.js'
 export default {
-  name: "SmsDataRulesDetail",
-  props: ["visible", "type", "row","getTableData"],
+  name: 'SmsDataRulesDetail',
+  props: ['visible', 'type', 'row', 'getTableData'],
 
   components: {
     YsInput
   },
   computed: {
-    title() {
-      return this.type === "edit" ? "编辑短信数据规则" : "新增短信数据规则";
+    title () {
+      return this.type === 'edit' ? '编辑短信数据规则' : '新增短信数据规则'
     }
   },
-  data() {
+  data () {
     return {
       form: {
-        id: "",
+        id: '',
         fromList: [],
         phoneList: [],
         smsContainList: [],
@@ -57,17 +81,17 @@ export default {
         status: '1'
       },
       loading: false
-    };
+    }
   },
   watch: {
     visible: {
-      handler() {
+      handler () {
         if (this.visible) {
-          if (this.type === "add") {
-            
-          }
-          if (this.type === "edit") {
-            this.form = {...this.form,...this.row}
+          // if (this.type === 'add') {
+
+          // }
+          if (this.type === 'edit') {
+            this.form = { ...this.form, ...this.row }
           }
         }
       },
@@ -75,68 +99,68 @@ export default {
     }
   },
   methods: {
-    submitForm(formName) {
-      if (this.type === "add") {
-        this.$refs[formName].validate(valid => {
+    submitForm (formName) {
+      if (this.type === 'add') {
+        this.$refs[formName].validate((valid) => {
           if (valid) {
-            this.loading = true;
+            this.loading = true
             addSmsDataRulesApi(this.form)
-              .then(res => {
+              .then((res) => {
                 if (res.data.code === 200) {
-                  this.$message.success("添加成功!");
+                  this.$message.success('添加成功!')
                 } else {
-                  this.$message.error("添加失败!");
+                  this.$message.error('添加失败!')
                 }
               })
               .finally(() => {
-                this.loading = false;
-                this.cancel();
+                this.loading = false
+                this.cancel()
               })
-              .catch(() => {});
+              .catch(() => {})
           } else {
-            console.log("error submit!!");
-            return false;
+            console.log('error submit!!')
+            return false
           }
-        });
+        })
       }
-       if (this.type === "edit") {
-        this.$refs[formName].validate(valid => {
+      if (this.type === 'edit') {
+        this.$refs[formName].validate((valid) => {
           if (valid) {
-            this.loading = true;
+            this.loading = true
             editSmsDataRulesApi(this.form)
-              .then(res => {
+              .then((res) => {
                 if (res.data.code === 200) {
-                  this.$message.success("修改成功!");
+                  this.$message.success('修改成功!')
                 } else {
-                  this.$message.error("修改失败!");
+                  this.$message.error('修改失败!')
                 }
               })
               .finally(() => {
-                this.loading = false;
-                this.cancel();
+                this.loading = false
+                this.cancel()
               })
-              .catch(() => {});
+              .catch(() => {})
           } else {
-            console.log("error submit!!");
-            return false;
+            console.log('error submit!!')
+            return false
           }
-        });
+        })
       }
     },
-    cancel() {
-      this.$emit("update:visible", false);
-      this.form= {
-        id: "",
+    cancel () {
+      this.$emit('update:visible', false)
+      this.form = {
+        id: '',
         fromList: [],
         phoneList: [],
         smsContainList: [],
         smsNotContainList: [],
         status: '1'
-      },
+      }
       this.getTableData()
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

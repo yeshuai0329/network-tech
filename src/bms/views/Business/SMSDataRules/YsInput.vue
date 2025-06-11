@@ -12,43 +12,42 @@
 
 <script>
 export default {
-  props: ["value",'placeholder','clearable'],
+  props: ['value', 'placeholder', 'clearable'],
   model: {
-    prop: "value",
-    event: "change"
+    prop: 'value',
+    event: 'change'
   },
-  data() {
+  data () {
     return {
-      val: "",
+      val: '',
       valList: []
-    };
+    }
   },
   watch: {
     value: {
-      handler() {
-        console.log("this.value", this.value);
-        this.valList = this.value;
+      handler () {
+        console.log('this.value', this.value)
+        this.valList = this.value
       },
       immediate: true
     }
   },
   methods: {
-    add() {
-      if(this.val){
-        this.valList.push(this.val);
-        this.val = "";
-        this.$emit("update:change", this.valList);
+    add () {
+      if (this.val) {
+        this.valList.push(this.val)
+        this.val = ''
+        this.$emit('update:change', this.valList)
       } else {
         this.$message.warning(this.placeholder)
       }
-    
     },
-    close(index) {
-      this.valList.splice(index,1);
-      this.$emit("update:change", this.valList);
+    close (index) {
+      this.valList.splice(index, 1)
+      this.$emit('update:change', this.valList)
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
