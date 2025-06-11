@@ -18,8 +18,8 @@
           v-model="form.status"
           active-text="启用"
           inactive-text="禁用"
-          :active-value="1"
-          :inactive-value="0"
+          :active-value="'1'"
+          :inactive-value="'0'"
         />
       </el-form-item>
     </el-form>
@@ -54,7 +54,7 @@ export default {
         phoneList: [],
         smsContainList: [],
         smsNotContainList: [],
-        status: 1
+        status: '1'
       },
       loading: false
     };
@@ -131,7 +131,7 @@ export default {
         phoneList: [],
         smsContainList: [],
         smsNotContainList: [],
-        status: 1
+        status: '1'
       },
       this.getTableData()
     }

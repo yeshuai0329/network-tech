@@ -69,16 +69,16 @@
 
       <el-table-column align="center" prop="status" label="规则状态" width="200">
         <template slot-scope="scope">
-          <el-tag type="success" v-if="scope.row.status === 1">启用</el-tag>
-          <el-tag type="danger" v-if="scope.row.status === 0">禁用</el-tag>
+          <el-tag type="success" v-if="scope.row.status == 1">启用</el-tag>
+          <el-tag type="danger" v-if="scope.row.status == 0">禁用</el-tag>
         </template>
       </el-table-column>
       <el-table-column fixed="right" align="center" label="操作" min-width="300">
         <template slot-scope="scope">
           <el-button type="primary" size="small" @click="editSmsDataRules(scope.row)">编辑</el-button>
           <el-button type="primary" size="small" @click="copyLink(scope.row.code)">链接</el-button>
-          <el-button v-if="scope.row.status === 0" type="success" size="small">启用</el-button>
-          <el-button v-if="scope.row.status === 1" type="warning" size="small">禁用</el-button>
+          <el-button v-if="scope.row.status == 0" type="success" size="small">启用</el-button>
+          <el-button v-if="scope.row.status == 1" type="warning" size="small">禁用</el-button>
           <el-button type="danger" size="small" @click="delSmsDataRules(scope.row.id)">删除</el-button>
         </template>
       </el-table-column>
