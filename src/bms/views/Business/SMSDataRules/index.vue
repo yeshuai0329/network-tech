@@ -20,10 +20,16 @@
       <el-button type="primary" icon="el-icon-plus" @click="AddSmsDataRules" plain size="small">新增</el-button>
     </div>
 
-    <el-table class="main-table" style="width: 100%" :data="tableData" border>
+    <el-table v-loading="loading" class="main-table" style="width: 100%" :data="tableData" border>
       <el-table-column fixed type='index' :index="tableIndex" align="center" label="序号" width="60"></el-table-column>
-      <el-table-column fixed prop="code" label="短信数据规则编号" width="200"></el-table-column>
-      <el-table-column prop="phoneList" label="手机编号" min-width="300">
+      <el-table-column fixed prop="code" label="短信数据规则编号" width="200" align="center"></el-table-column>
+      <el-table-column align="center" prop="status" label="规则状态" width="200">
+        <template slot-scope="scope">
+          <el-tag type="success" v-if="scope.row.status == 1">启用</el-tag>
+          <el-tag type="danger" v-if="scope.row.status == 0">禁用</el-tag>
+        </template>
+      </el-table-column>
+      <el-table-column prop="phoneList" label="手机编号" min-width="300" align="center">
         <template slot-scope="scope">
           <el-tag
             style="margin-right:10px"
@@ -34,7 +40,7 @@
           >{{ item }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column prop="fromList" label="来信号码" min-width="300">
+      <el-table-column prop="fromList" label="来信号码" min-width="300" align="center">
         <template slot-scope="scope">
           <el-tag
             style="margin-right:10px"
@@ -45,7 +51,7 @@
           >{{ item }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column prop="smsContainList" label="关键字（包含）" min-width="300">
+      <el-table-column prop="smsContainList" label="关键字（包含）" min-width="300" align="center">
         <template slot-scope="scope">
           <el-tag
             style="margin-right:10px"
@@ -56,7 +62,7 @@
           >{{ item }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column prop="smsNotContainList" label="关键字（排除）" min-width="300">
+      <el-table-column prop="smsNotContainList" label="关键字（排除）" min-width="300" align="center">
         <template slot-scope="scope">
           <el-tag
             style="margin-right:10px"
@@ -65,13 +71,6 @@
             effect="plain"
             type="info"
           >{{ item }}</el-tag>
-        </template>
-      </el-table-column>
-
-      <el-table-column align="center" prop="status" label="规则状态" width="200">
-        <template slot-scope="scope">
-          <el-tag type="success" v-if="scope.row.status == 1">启用</el-tag>
-          <el-tag type="danger" v-if="scope.row.status == 0">禁用</el-tag>
         </template>
       </el-table-column>
       <el-table-column fixed="right" align="center" label="操作" min-width="300">
@@ -126,7 +125,8 @@ export default {
       },
       visibleSmsDataRule: false,
       SmsDataRulesDetailType: 'add',
-      row: {}
+      row: {},
+      loading: false
     }
   },
   mounted () {
@@ -137,6 +137,7 @@ export default {
       return (this.pageInfo.pageNum - 1) * this.pageInfo.pageSize + 1 + index
     },
     getTableData () {
+      this.loading = true
       getSmsDataRulesApi({
         ...this.formInline,
         ...this.pageInfo
@@ -150,6 +151,9 @@ export default {
           }
         })
         .catch(() => {})
+        .finally(() => {
+          this.loading = false
+        })
     },
     AddSmsDataRules () {
       this.SmsDataRulesDetailType = 'add'

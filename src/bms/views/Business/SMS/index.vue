@@ -28,7 +28,7 @@
       </el-row>
     </el-form>
 
-    <el-table :data="tableData" border>
+    <el-table :data="tableData" border v-loading="loading">
       <el-table-column
         fixed
         type="index"
@@ -41,21 +41,25 @@
         fixed
         prop="phone"
         label="手机编号"
-        width="200"
+        align="center"
+        width="180"
       ></el-table-column>
       <el-table-column
         prop="from"
         label="来信号码"
-        width="250"
+        align="center"
+        width="200"
       ></el-table-column>
       <el-table-column
         prop="sms"
         label="短信内容"
+        align="center"
         min-width="120"
       ></el-table-column>
       <el-table-column
         prop="time"
         label="接收时间"
+        align="center"
         width="200"
       ></el-table-column>
     </el-table>
@@ -89,7 +93,8 @@ export default {
         pageNum: 1,
         pageSize: 10,
         total: 0
-      }
+      },
+      loading: false
     }
   },
   mounted () {
@@ -100,6 +105,7 @@ export default {
       return (this.pageInfo.pageNum - 1) * this.pageInfo.pageSize + 1 + index
     },
     getTableData () {
+      this.loading = true
       getSMSApi({
         ...this.formInline,
         ...this.pageInfo
@@ -114,6 +120,9 @@ export default {
           }
         })
         .catch(() => {})
+        .finally(() => {
+          this.loading = false
+        })
     },
     searchForm () {
       this.getTableData()
