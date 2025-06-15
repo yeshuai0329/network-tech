@@ -45,6 +45,9 @@
           :inactive-value="'0'"
         />
       </el-form-item>
+       <el-form-item label="距当前时间：" prop="fromNowOnMap">
+        <el-input-number v-model="form.fromNowOnMap" :min="0" :max="2400"   :precision="1" :controls="false"/>小时
+      </el-form-item>
        <el-form-item label="备注信息：" prop="remark">
         <el-input
           type="textarea"
@@ -87,7 +90,9 @@ export default {
         smsContainList: [],
         smsNotContainList: [],
         status: '1',
-        remark: ''
+        remark: '',
+        fromNowOnMap: 0,
+        fromNowOn: 0
       },
       loading: false
     }
@@ -97,7 +102,7 @@ export default {
       handler () {
         if (this.visible) {
           if (this.type === 'edit') {
-            this.form = { ...this.form, ...this.row }
+            this.form = { ...this.form, ...this.row, fromNowOnMap: this.row.fromNowOn / (60 * 60 * 1000) }
           }
         }
       },
@@ -110,7 +115,10 @@ export default {
         this.$refs[formName].validate((valid) => {
           if (valid) {
             this.loading = true
-            addSmsDataRulesApi(this.form)
+            addSmsDataRulesApi({
+              ...this.form,
+              fromNowOn: (1000 * 60 * 60) * this.form.fromNowOnMap || null
+            })
               .then((res) => {
                 if (res.data.code === 200) {
                   this.$message.success('添加成功!')
@@ -133,7 +141,10 @@ export default {
         this.$refs[formName].validate((valid) => {
           if (valid) {
             this.loading = true
-            editSmsDataRulesApi(this.form)
+            editSmsDataRulesApi({
+              ...this.form,
+              fromNowOn: (1000 * 60 * 60) * this.form.fromNowOnMap || null
+            })
               .then((res) => {
                 if (res.data.code === 200) {
                   this.$message.success('修改成功!')
