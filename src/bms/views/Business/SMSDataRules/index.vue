@@ -29,7 +29,8 @@
           <el-tag type="danger" v-if="scope.row.status == 0">禁用</el-tag>
         </template>
       </el-table-column>
-      <el-table-column prop="phoneList" label="手机编号" min-width="300" align="center">
+      <el-table-column  prop="remark" label="备注信息" width="200" align="center"></el-table-column>
+      <el-table-column prop="phoneList" label="手机编号" min-width="300" align="center" show-overflow-tooltip>
         <template slot-scope="scope">
           <el-tag
             style="margin-right:10px"

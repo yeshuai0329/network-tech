@@ -12,6 +12,7 @@
           v-model="form.phoneList"
           placeholder="请输入手机编号"
           clearable
+          :hasUpload='true'
         />
       </el-form-item>
       <el-form-item label="来信号码：" prop="fromList">
@@ -42,6 +43,13 @@
           inactive-text="禁用"
           :active-value="'1'"
           :inactive-value="'0'"
+        />
+      </el-form-item>
+       <el-form-item label="备注信息：" prop="remark">
+        <el-input
+          type="textarea"
+          v-model="form.remark"
+          :autosize="{ minRows: 3, maxRows: 3 }"
         />
       </el-form-item>
     </el-form>
@@ -78,7 +86,8 @@ export default {
         phoneList: [],
         smsContainList: [],
         smsNotContainList: [],
-        status: '1'
+        status: '1',
+        remark: ''
       },
       loading: false
     }
@@ -87,9 +96,6 @@ export default {
     visible: {
       handler () {
         if (this.visible) {
-          // if (this.type === 'add') {
-
-          // }
           if (this.type === 'edit') {
             this.form = { ...this.form, ...this.row }
           }
