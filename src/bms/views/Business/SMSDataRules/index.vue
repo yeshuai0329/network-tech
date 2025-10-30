@@ -29,7 +29,8 @@
           <el-tag type="danger" v-if="scope.row.status == 0">禁用</el-tag>
         </template>
       </el-table-column>
-      <el-table-column prop="phoneList" label="手机编号" min-width="300" align="center">
+      <el-table-column  prop="remark" label="备注信息" width="200" align="center"></el-table-column>
+      <el-table-column prop="phoneList" label="手机编号" min-width="300" align="center" show-overflow-tooltip>
         <template slot-scope="scope">
           <el-tag
             style="margin-right:10px"
@@ -73,6 +74,13 @@
           >{{ item }}</el-tag>
         </template>
       </el-table-column>
+
+       <el-table-column prop="fromNowOn" label="距当前时间（小时）" min-width="200" align="center">
+        <template slot-scope="scope">
+          {{ formNowOnFormat(scope.row.fromNowOn)}}
+        </template>
+      </el-table-column>
+
       <el-table-column fixed="right" align="center" label="操作" min-width="300">
         <template slot-scope="scope">
           <el-button type="primary" size="small" @click="editSmsDataRules(scope.row)">编辑</el-button>
@@ -135,6 +143,13 @@ export default {
   methods: {
     tableIndex (index) {
       return (this.pageInfo.pageNum - 1) * this.pageInfo.pageSize + 1 + index
+    },
+    formNowOnFormat (fromNowOn) {
+      if (typeof fromNowOn === 'object') {
+        return '--'
+      } else {
+        return fromNowOn / (1000 * 60 * 60)
+      }
     },
     getTableData () {
       this.loading = true

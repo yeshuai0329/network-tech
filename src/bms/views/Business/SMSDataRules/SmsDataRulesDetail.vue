@@ -12,6 +12,7 @@
           v-model="form.phoneList"
           placeholder="请输入手机编号"
           clearable
+          :hasUpload='true'
         />
       </el-form-item>
       <el-form-item label="来信号码：" prop="fromList">
@@ -42,6 +43,16 @@
           inactive-text="禁用"
           :active-value="'1'"
           :inactive-value="'0'"
+        />
+      </el-form-item>
+       <el-form-item label="距当前时间：" prop="fromNowOnMap">
+        <el-input-number v-model="form.fromNowOnMap" :min="0" :max="2400"   :precision="1" :controls="false"/>小时
+      </el-form-item>
+       <el-form-item label="备注信息：" prop="remark">
+        <el-input
+          type="textarea"
+          v-model="form.remark"
+          :autosize="{ minRows: 3, maxRows: 3 }"
         />
       </el-form-item>
     </el-form>
@@ -78,7 +89,10 @@ export default {
         phoneList: [],
         smsContainList: [],
         smsNotContainList: [],
-        status: '1'
+        status: '1',
+        remark: '',
+        fromNowOnMap: 0,
+        fromNowOn: 0
       },
       loading: false
     }
@@ -87,11 +101,8 @@ export default {
     visible: {
       handler () {
         if (this.visible) {
-          // if (this.type === 'add') {
-
-          // }
           if (this.type === 'edit') {
-            this.form = { ...this.form, ...this.row }
+            this.form = { ...this.form, ...this.row, fromNowOnMap: this.row.fromNowOn / (60 * 60 * 1000) }
           }
         }
       },
@@ -104,7 +115,10 @@ export default {
         this.$refs[formName].validate((valid) => {
           if (valid) {
             this.loading = true
-            addSmsDataRulesApi(this.form)
+            addSmsDataRulesApi({
+              ...this.form,
+              fromNowOn: (1000 * 60 * 60) * this.form.fromNowOnMap || null
+            })
               .then((res) => {
                 if (res.data.code === 200) {
                   this.$message.success('添加成功!')
@@ -127,7 +141,10 @@ export default {
         this.$refs[formName].validate((valid) => {
           if (valid) {
             this.loading = true
-            editSmsDataRulesApi(this.form)
+            editSmsDataRulesApi({
+              ...this.form,
+              fromNowOn: (1000 * 60 * 60) * this.form.fromNowOnMap || null
+            })
               .then((res) => {
                 if (res.data.code === 200) {
                   this.$message.success('修改成功!')
