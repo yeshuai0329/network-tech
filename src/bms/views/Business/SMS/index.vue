@@ -20,6 +20,15 @@
             />
           </el-form-item>
         </el-col>
+         <el-col :span="5">
+          <el-form-item>
+            <el-input
+              v-model="formInline.sms"
+              placeholder="关键词(包含)"
+              clearable
+            />
+          </el-form-item>
+        </el-col>
         <el-col :span="3">
           <el-form-item>
             <el-button type="primary" @click="searchForm">查询</el-button>
@@ -86,7 +95,8 @@ export default {
     return {
       formInline: {
         phone: '',
-        from: ''
+        from: '',
+        sms: ''
       },
       tableData: [],
       pageInfo: {
